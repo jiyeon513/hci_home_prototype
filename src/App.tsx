@@ -1,4 +1,4 @@
-import { useState, type FormEvent, type KeyboardEvent } from 'react'
+import { useEffect, useState, type FormEvent, type KeyboardEvent } from 'react'
 
 type AuthMode = 'login' | 'signup'
 type NewProject = {
@@ -87,7 +87,9 @@ function PlusIcon() {
 
 function App() {
   const [mode, setMode] = useState<AuthMode>('login')
-  const [page, setPage] = useState<'auth' | 'home'>('auth')
+  const [page, setPage] = useState<'auth' | 'home'>(() =>
+    window.location.pathname === '/home' ? 'home' : 'auth',
+  )
   const [newProjects, setNewProjects] = useState<NewProject[]>([])
   const [createdProjectIndex, setCreatedProjectIndex] = useState<number | null>(null)
   const [loginEmail, setLoginEmail] = useState('')
@@ -102,6 +104,16 @@ function App() {
   const isSignupReady =
     signupEmail.trim() !== '' && signupPassword.trim() !== '' && signupVerifyPassword.trim() !== ''
   const isSubmitReady = isLogin ? isLoginReady : isSignupReady
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setPage(window.location.pathname === '/home' ? 'home' : 'auth')
+    }
+
+    window.addEventListener('popstate', handlePopState)
+
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
 
   const openRelatedWork = () => {
     window.location.href = RELATED_WORK_URL
@@ -142,6 +154,7 @@ function App() {
 
     if (isLogin) {
       if (isLoginReady) {
+        window.history.pushState(null, '', '/home')
         setPage('home')
       }
       return
