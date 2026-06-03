@@ -7,6 +7,22 @@ npm run dev
 
 로컬: http://localhost:5180
 
+## Vercel 배포 (권장)
+
+1. https://vercel.com 에서 GitHub 계정으로 로그인
+2. **Add New Project** → `jiyeon513/hci_home_prototype` Import
+3. Framework Preset: **Vite** (자동 감지), Build: `npm run build`, Output: `dist`
+4. **Deploy** 클릭 → `https://프로젝트명.vercel.app` 에서 바로 접속
+
+`main`에 push할 때마다 자동 재배포됩니다. `/` 와 `/home` 라우팅은 `vercel.json`의 SPA rewrite로 처리됩니다.
+
+CLI로 배포할 때:
+
+```bash
+npx vercel login
+npx vercel --prod
+```
+
 ## GitHub Pages 배포
 
 배포 URL: **https://jiyeon513.github.io/hci_home_prototype/**
