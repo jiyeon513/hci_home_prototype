@@ -53,7 +53,7 @@ export default function AuthPage() {
   return (
     <div className="auth-page">
       <section className="auth-brand">
-        <img src="/pAIper_logo.png" alt="pAIper" className="auth-logo" />
+        <img src={`${import.meta.env.BASE_URL}pAIper_logo.png`} alt="pAIper" className="auth-logo" />
         <p className="auth-tagline">: Your Trusted AI Partner for Academic Writing</p>
       </section>
 

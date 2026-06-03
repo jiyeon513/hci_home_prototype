@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type KeyboardEvent } from 'react'
+import { useCallback, useEffect, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react'
 import { ArrowCircleIcon, PlusIcon } from '../icons'
 import {
   applyPendingVisit,
@@ -139,7 +139,7 @@ export default function HomePage() {
     window.setTimeout(() => setCreatedProjectId(null), 1400)
   }
 
-  const handleProjectTitleKeyDown = (event: KeyboardEvent<HTMLInputElement>, projectId: string) => {
+  const handleProjectTitleKeyDown = (event: ReactKeyboardEvent<HTMLInputElement>, projectId: string) => {
     if (event.key === 'Enter') {
       event.preventDefault()
       createProject(projectId)
@@ -174,7 +174,7 @@ export default function HomePage() {
       return tag === 'INPUT' || tag === 'TEXTAREA' || target.isContentEditable
     }
 
-    const handleKeyDown = (event: KeyboardEvent) => {
+    const handleKeyDown = (event: globalThis.KeyboardEvent) => {
       if (event.ctrlKey && event.shiftKey && event.key === '0') {
         event.preventDefault()
         resetWorkspace()
