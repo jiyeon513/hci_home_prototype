@@ -77,7 +77,10 @@ export default function HomePage() {
     }
 
     saveHomeState(pendingState)
-    window.location.href = taskUrl(task)
+    window.location.href = taskUrl(task, {
+      projectId,
+      firstVisit: status === 'muted',
+    })
   }
 
   const addProject = () => {

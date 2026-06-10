@@ -98,8 +98,17 @@ export function applyPendingVisit(state: HomeState): HomeState {
   }
 }
 
-export function taskUrl(task: 'relatedWork' | 'writing') {
-  return task === 'relatedWork' ? RELATED_WORK_URL : WRITING_URL
+export type TaskUrlOptions = {
+  projectId: string
+  firstVisit: boolean
+}
+
+export function taskUrl(task: 'relatedWork' | 'writing', options: TaskUrlOptions) {
+  const base = task === 'relatedWork' ? RELATED_WORK_URL : WRITING_URL
+  const url = new URL(base)
+  url.searchParams.set('projectId', options.projectId)
+  url.searchParams.set('firstVisit', String(options.firstVisit))
+  return url.toString()
 }
 
 export function taskCardClass(status: TaskStatus) {
