@@ -22,8 +22,10 @@ export type HomeState = {
 }
 
 export const STORAGE_KEY = 'paiper-home-v1'
-export const RELATED_WORK_URL = 'https://port-0-hci-me2k6w6de195468f.sel5.cloudtype.app/'
-export const WRITING_URL = 'https://vast-rachel-inside-pre.trycloudflare.com/'
+export const RELATED_WORK_URL =
+  import.meta.env.VITE_RELATED_WORK_URL ?? 'https://port-0-hci-me2k6w6de195468f.sel5.cloudtype.app/'
+export const WRITING_URL =
+  import.meta.env.VITE_WRITING_URL ?? 'https://realtors-susan-russia-guestbook.trycloudflare.com/'
 
 export function getInitialHomeState(): HomeState {
   return {
